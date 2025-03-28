@@ -1,11 +1,4 @@
 version: 0.2
-env:
-  secrets-manager:
-    LOGIN: prod/sonar/x23418613:sonartoken
-    HOST: prod/sonar/x23418613:HOST
-    Organization: prod/sonar/x23418613:Organization
-    Project: prod/sonar/x23418613:Project
-
 phases:
   install:
     runtime-versions:
