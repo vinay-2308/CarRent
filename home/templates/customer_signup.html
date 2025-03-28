@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block title %} Customer Signup {% endblock %}
+{% block css %}
+
+<style>
+  body {
+    background-color: #fcbf49; 
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #eae2b7;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .form-content {
+    max-height: 400px; /* Adjust height for scrollable area */
+    overflow-y: auto; /* Enable scrolling */
+  }
+
+  h1 {
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  p {
+    text-align: center;
+    color: #666;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #71cc09;
+    outline: none;
+    background-color: #eaf6db;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background-color: #71cc09;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: #64b109;
+  }
+
+  a {
+    color: dodgerblue;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+{% endblock %}
+{% block body %}
+<div class="container">
+  <h1>Customer Signup Form</h1>
+  <p>Please fill in this form to create an account.</p>
+  <hr>
+  <div class="form-content">
+    <form method="POST" novalidate> 
+      {% csrf_token %}
+  
+      <label><b>First Name</b></label>
+      <input type="text" placeholder="Enter First Name" name="first_name" required>
+
+      <label><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last Name" name="last_name" required>
+
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+  
+      <label><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label><b>Contact Number</b></label>
+      <input type="text" placeholder="Enter Contact Number" name="phone" required>
+
+      <label><b>City</b></label>
+      <input type="text" placeholder="Enter City" name="city" required>
+  
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password1" required>
+
+      <label><b>Confirm Password</b></label>
+      <input type="password" placeholder="Confirm Password" name="password2" required>
+            
+      <button type="submit" style="background-color: #9EDF9C; font-size: 22px; width: 8rem;" class="btn">Signup</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+{% if alert %}
+<script>
+  alert("You are now successfully registered as a customer");
+  document.location = "/customer_login";
+</script>
+{% endif %}
+{% endblock %}

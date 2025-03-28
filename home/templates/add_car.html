@@ -1,0 +1,145 @@
+{% extends "car_dealer_navbar.html" %}
+{% block title %}Customer Login{% endblock title %}
+{% block css %}
+
+<style>
+    body {
+      background-color:#edf2f4;
+      /*background-image: url("/media/car_img1.jpg"); 
+      background-size:cover;*/
+      font-family: Arial, Helvetica, sans-serif;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto; /* Center the container vertically */
+      padding: 20px;
+      background-color: #8d99ae;
+      border-radius: 12px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+  
+    h1 {
+      font-size: 30px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+  
+    p {
+      text-align: center;
+      color: #666;
+    }
+  
+    hr {
+      border: 0;
+      border-top: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+  
+    label {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 8px;
+      display: block;
+    }
+  
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #f4f4f4;
+    }
+  
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #71cc09;
+      outline: none;
+      background-color: #eaf6db;
+    }
+  
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #71cc09;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  
+    button:hover {
+      background-color: #64b109;
+    }
+  
+    a {
+      color: dodgerblue;
+      text-decoration: none;
+    }
+  
+    a:hover {
+      text-decoration: underline;
+    }
+  
+    /* Make the form scrollable if content overflows */
+    .form-content {
+      max-height: 500px;  /* Set a fixed height */
+      overflow-y: auto;   /* Add vertical scrollbar if content overflows */
+      padding-bottom: 20px;  /* Padding for the scrollbar */
+    }
+  
+  </style>
+{% endblock css %}
+{% block body %}
+  
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row mt-2">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Car Name</i></label>
+                <input type="text" class="form-control" name="car_name" placeholder="Name of the Car">
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="form-group col-md-6">
+                <label><i style="font-weight: bold;">City</i></label>
+                <input type="text" class="form-control" name="city" placeholder="City">
+            </div>
+            <div class="form-group col-md-6">
+                <label><i style="font-weight: bold;">Car Image</i></label>
+                <input type="file" class="form-control" name="image">
+            </div>
+        </div>
+     
+        <div class="row mt-3">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Capacity</i></label>
+                <input type="number" class="form-control" name="capacity" placeholder="Number of Seats">
+            </div>
+        </div>
+     
+        <div class="row mt-3">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Rent</i></label>
+                <input type="number" class="form-control" name="rent" placeholder="Rent (per day)">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+{% endblock body %}
+
+

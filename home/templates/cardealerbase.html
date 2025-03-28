@@ -1,0 +1,103 @@
+{% extends "car_dealer_navbar.html" %}
+{% block title %}Car Dealer Portal{% endblock title %}
+
+{% block css %}
+<style>
+  /* Custom Styles */
+  body {
+      background-color: #fcbf49; /* Light background color */
+  }
+
+  .container {
+      max-width: 1200px;
+  }
+
+  .display-4 {
+      font-weight: bold;
+      color: #333;
+  }
+
+  .lead {
+      color: #666;
+  }
+
+  .card {
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for elevation */
+      transition: all 0.3s ease; /* Smooth transition on hover */
+  
+  }
+
+  .card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevated effect on hover */
+      transform: translateY(-5px); /* Slight upward movement */
+  }
+
+  .card-img-top {
+      border-radius: 10px 10px 0 0; /* Rounded top corners */
+      object-fit: cover; /* Ensure image fills the area */
+  }
+
+  .card-body {
+      padding: 1.5rem;
+  }
+
+  .car-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #333;
+  }
+
+  .card-text {
+      font-size: 1rem;
+      color: #555;
+  }
+
+  .btn-primary {
+      background-color: #007bff; /* Blue color for the button */
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  .col-sm-4 {
+      margin-bottom: 20px;
+  }
+</style>
+{% endblock css %}
+
+
+{% block body %}
+<div class="container mt-4">
+    <div>
+        <h1 class="display-4">
+            Online Car Rental System
+        </h1>
+        <p style="color:white" class="lead">You can select from the wide range of cars available</p>
+        <hr style="background-color: black;" class="my-4">
+    </div>
+    <div class="row mt-4">
+        {% for car in cars %}
+        <div class="col-sm-4 mt-4" style="width: 27rem;">
+            <div class="card">
+                <img src="/media/{{car.image}}" alt="Car image cap" class="card-img-top" height="260px">
+                <div class="card-body">
+                    <h5 class="car-title">Car Name: {{car.name}}</h5>
+                    <h6 class="card-text">Car Dealer: <b>{{car.car_dealer}}</b></h6>
+                    <p class="card-text">Rent: ₹ {{car.rent}} per day</p>
+                    <p class="card-text">Location: {{car.location.city}}</p>
+                    <a href="/customer_login/" class="btn btn-primary">Login to rent</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
