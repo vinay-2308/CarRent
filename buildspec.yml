@@ -1,4 +1,11 @@
 version: 0.2
+env:
+  secrets-manager:
+    LOGIN: prod/sonar/x23418613:sonartoken
+    HOST: prod/sonar/x23418613:HOST
+    Organization: prod/sonar/x23418613:Organization
+    Project: prod/sonar/x23418613:Project
+
 phases:
   install:
     runtime-versions:
@@ -7,14 +14,16 @@ phases:
       - echo "<-- RUNTIME EXECUTION -->"
       - pip install --upgrade pip
       - pip install -r requirements.txt pylint
+      - yum update -y
+      - yum install -y jq
 
 
   pre_build:
     commands:
-      - echo "PRE-Build stage"
-      - python --version
-      - python manage.py collectstatic --noinput
-
+      - echo "pre build stage completed"
+      - echo "PyLint Started"
+      - pylint rent_my_ride/**/*.py || true
+      - echo "pre build stage completed - PyLint Completed!!"
 
 
 artifacts:
