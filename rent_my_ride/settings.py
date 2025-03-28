@@ -27,8 +27,10 @@ SECRET_KEY = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['x23302712-rentacarenv.eba-ppbenpyj.eu-central-1.elasticbeanstalk.com/','*']
-CSRF_TRUSTED_ORIGINS = ['http://x23302712-rentacarenv.eba-ppbenpyj.eu-central-1.elasticbeanstalk.com/']
+ALLOWED_HOSTS = ['*']
+
+
+
 
 
 # Application definition
