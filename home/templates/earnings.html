@@ -73,7 +73,7 @@
   
 <div class="container">
     {% if all_orders %}
-    <h1 class="mt-4">Total Earnings: ₹ {{amount}}</h1>
+    <h1 class="mt-4">Total Earnings: € {{amount}}</h1>
     <div class="users-table mt-4">
         <table>
             <tbody>
@@ -91,7 +91,7 @@
                     <td>{{order.car.name}}</td>
                     <td><img src="{{order.car.image.url}}" alt="" width="100px" height="100px"></td>
                     <td>{{order.days}}</td>
-                    <td>₹ {{order.rent}}</td>
+                    <td>€ {{order.rent}}</td>
                     <td>{{order.car.capacity}}</td>
                 </tr>
                 {% endfor %}
