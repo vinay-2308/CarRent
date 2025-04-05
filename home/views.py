@@ -101,7 +101,8 @@ def car_dealer_signup(request):
             location = Location.objects.get(city = city.lower())
             car_dealer = CarDealer(car_dealer = user, phone=phone, location=location, type="Car Dealer")
         car_dealer.save()
-        return render(request, "car_dealer_login.html")
+        #return render(request, "car_dealer_login.html")
+        return redirect("car_dealer_login")
     return render(request, "car_dealer_signup.html")
 """ 
 def car_dealer_login(request):
