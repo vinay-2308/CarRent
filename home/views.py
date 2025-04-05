@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from . models import *
@@ -179,31 +179,40 @@ def add_car(request):
 def all_cars(request):
     dealer = CarDealer.objects.filter(car_dealer=request.user).first()
     cars = Car.objects.filter(car_dealer=dealer)
+    if request.method == "POST":
+        car_id = request.POST.get('car_id')
+        car = get_object_or_404(Car, id=car_id)
+        return render(request, "edit_car.html", {'car': car})
     return render(request, "all_cars.html", {'cars':cars})
 
-def edit_car(request, myid):
-    car = Car.objects.filter(id=myid)
+
+def edit_car(request):
     if request.method == "POST":
-        car_name = request.POST.get('car_name')
-        city = request.POST.get('city')
-        capacity = request.POST.get('capacity')
-        rent = request.POST.get('rent')
-        
-        car.name = car_name
-        car.city = city
-        car.capacity = capacity
-        car.rent = rent
+        car_id = request.POST.get('car_id')
+        car = get_object_or_404(Car, id=car_id)
+
+        car.name = request.POST.get('car_name')
+        car.capacity = request.POST.get('capacity')
+        car.rent = request.POST.get('rent')
+
+        city_name = request.POST.get('city')
+        if city_name:
+            location = Location.objects.filter(city__iexact=city_name).first()
+            if location:
+                car.location = location
+            else:
+                location = Location.objects.create(city=city_name)
+                car.location = location
+
+        image = request.FILES.get('image')
+        if image:
+            car.image = image
+
         car.save()
 
-        try:
-            image = request.FILES['image']
-            car.image = image
-            car.save()
-        except:
-            pass
-        alert = True
-        return render(request, "edit_car.html", {'alert':alert})
-    return render(request, "edit_car.html", {'car':car})
+        return render(request, "edit_car.html", {'car': car, 'alert': True})
+
+    return render(request, "edit_car.html")
 
 def delete_car(request, myid):
     if not request.user.is_authenticated:

@@ -99,6 +99,11 @@
                     <td>{{car.capacity}}</td>
                     <td>
                       <!-- Update and Delete Buttons -->
+                       <form action="{% url 'all_cars' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="car_id" value="{{car.id}}"/>
+                        <button type="submit" class="btn btn-update" >Edit</button>
+                       </form>
                       <!-- <a href="" class="btn btn-update">Update</a> -->
                       <a href="/delete_car/{{car.id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{car.name}}?')">Delete</a>
                     </td>
