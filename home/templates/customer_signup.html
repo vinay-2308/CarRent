@@ -50,7 +50,7 @@
     display: block;
   }
 
-  input[type="text"],
+  input[type="text"], input[type="email"]
   input[type="password"] {
     width: 100%;
     padding: 12px;
@@ -101,7 +101,7 @@
   <p>Please fill in this form to create an account.</p>
   <hr>
   <div class="form-content">
-    <form method="POST" novalidate> 
+    <form method="POST"> 
       {% csrf_token %}
   
       <label><b>First Name</b></label>
@@ -114,7 +114,7 @@
       <input type="text" placeholder="Enter Username" name="username" required>
   
       <label><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      <input type="email" placeholder="Enter Email" name="email" required>
 
       <label><b>Contact Number</b></label>
       <input type="text" placeholder="Enter Contact Number" name="phone" required>

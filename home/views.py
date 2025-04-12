@@ -6,6 +6,7 @@ from . models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import success, error
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -153,6 +154,7 @@ def signout(request):
     logout(request)
     return redirect('/')
 
+@login_required(login_url='/car_dealer_login')
 def add_car(request):
     if request.method == "POST":
         car_name = request.POST.get('car_name')
@@ -177,6 +179,8 @@ def add_car(request):
         return render(request, "add_car.html", {'alertt':alertt})
     return render(request, "add_car.html") 
 
+
+@login_required(login_url='/car_dealer_login')
 def all_cars(request):
     dealer = CarDealer.objects.filter(car_dealer=request.user).first()
     cars = Car.objects.filter(car_dealer=dealer)
@@ -187,6 +191,7 @@ def all_cars(request):
     return render(request, "all_cars.html", {'cars':cars})
 
 
+@login_required(login_url='/car_dealer_login')
 def edit_car(request):
     if request.method == "POST":
         car_id = request.POST.get('car_id')
@@ -215,6 +220,8 @@ def edit_car(request):
 
     return render(request, "edit_car.html")
 
+
+@login_required(login_url='/car_dealer_login')
 def delete_car(request, myid):
     if not request.user.is_authenticated:
         return redirect("/car_dealer_login")
@@ -225,6 +232,8 @@ def delete_car(request, myid):
 def customer_homepage(request):
     return render(request, "customer_homepage.html")
 
+
+@login_required(login_url='/customer_login')
 def search_results(request):
     city = request.POST.get('city')
     if city is not None:
@@ -246,10 +255,10 @@ def car_rent(request):
     cost_per_day = int(car.rent)
     return render(request, 'car_rent.html', {'car':car, 'cost_per_day':cost_per_day})
 
+@login_required(login_url='/customer_login') 
 def order_details(request):
     car_id = request.POST.get('id')
-    username = request.user
-    user = User.objects.get(username=username)
+    user = request.user
     days = request.POST.get('days')
     car = Car.objects.get(id=car_id)
     if car.is_available:
@@ -267,6 +276,8 @@ def order_details(request):
         return render(request, "order_details.html", {'order':order})
     return render(request, "order_details.html")
 
+
+@login_required(login_url='/customer_login')
 def past_orders(request):
     all_orders = []
     user = User.objects.get(username=request.user)
@@ -281,11 +292,14 @@ def past_orders(request):
                 all_orders.append(order_dictionary)
     return render(request, "past_orders.html", {'all_orders':all_orders})
 
+@login_required(login_url='/customer_login')
 def delete_order(request, myid):
     order = Order.objects.filter(id=myid)
     order.delete()
     return redirect("/past_orders")
 
+
+@login_required(login_url='/car_dealer_login')
 def all_orders(request):
     username = request.user
     user = User.objects.get(username = username)
@@ -297,6 +311,8 @@ def all_orders(request):
             all_orders.append(order)
     return render(request, "all_orders.html", {'all_orders':all_orders})
 
+
+@login_required(login_url='/car_dealer_login')
 def complete_order(request):
     order_id = request.POST.get('id')
     order = Order.objects.get(id=order_id)
@@ -307,6 +323,8 @@ def complete_order(request):
     car.save()
     return HttpResponseRedirect('/all_orders/') 
 
+
+@login_required(login_url='/car_dealer_login')
 def earnings(request):
     username = request.user
     user = User.objects.get(username=username)
