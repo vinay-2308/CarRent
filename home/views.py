@@ -9,17 +9,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-def index(request):
+def index(request): #fetches all cars and displays in the home page
     cars = Car.objects.all()
     return render(request,"index.html",{'cars':cars})
 
-def index2(request):
-    cars = Car.objects.all()
-    return render(request,"index2.html",{'cars':cars})
+# def index2(request):
+#     cars = Car.objects.all()
+#     return render(request,"index2.html",{'cars':cars})
 
-def index3(request):
-    cars = Car.objects.all()
-    return render(request,"index3.html",{'cars':cars})
+# def index3(request):
+#     cars = Car.objects.all()
+#     return render(request,"index3.html",{'cars':cars})
 
 def customer_signup(request):
     if request.user.is_authenticated:
@@ -150,7 +150,7 @@ def car_dealer_login(request):
                 return render(request, "car_dealer_login.html", {"alert": alert})
     return render(request, "car_dealer_login.html")
 
-def signout(request):
+def signout(request): #logsout the user and redirects to home page
     logout(request)
     return redirect('/')
 
@@ -234,7 +234,7 @@ def customer_homepage(request):
 
 
 @login_required(login_url='/customer_login')
-def search_results(request):
+def search_results(request): #Gets city input from the customer, finds cars available in that city
     city = request.POST.get('city')
     if city is not None:
         city = city.lower()
@@ -249,7 +249,7 @@ def search_results(request):
     request.session['vehicles_list'] = vehicles_list
     return render(request, "search_results.html")
 
-def car_rent(request):
+def car_rent(request): #Fetches the selected car and shows its rental page with cost-per-day.
     id = request.POST.get('id')
     car = Car.objects.get(id=id)
     cost_per_day = int(car.rent)

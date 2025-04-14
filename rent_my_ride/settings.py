@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Sets the base path of the project directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
 ]
-
+#Handles request/response processing. Includes session handling, authentication, security features, etc.
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'rent_my_ride.urls'
+ROOT_URLCONF = 'rent_my_ride.urls' # it points the main url configuration file
 
 TEMPLATES = [
     {
